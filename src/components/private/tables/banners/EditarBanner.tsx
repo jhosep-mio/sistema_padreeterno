@@ -7,6 +7,11 @@ import Swal from 'sweetalert2'
 import { Loading } from '../../../shared/Loading'
 import { type ImagenState } from '../../../shared/Interfaces'
 import { ImageUpdate } from '../../../shared/ImageUpdate'
+import { TitleBriefs } from '../../../shared/TitleBriefs'
+import { InputsBriefs } from '../../../shared/InputsBriefs'
+import { Errors } from '../../../shared/Errors'
+import { useFormik } from 'formik'
+import { ScheamaBanner } from '../../../shared/Schemas'
 
 export const EditarBanner = (): JSX.Element => {
   const { id } = useParams()
@@ -29,6 +34,8 @@ export const EditarBanner = (): JSX.Element => {
   const upadateBanner = async (): Promise<void> => {
     setLoadingComponents(true)
     const data = new FormData()
+    data.append('titulo', values.titulo)
+    data.append('subtitulo', values.subTitulo)
     if (imagenNueva1.archivo != null) {
       data.append('imagen1', imagenNueva1.archivo)
     }
@@ -40,7 +47,9 @@ export const EditarBanner = (): JSX.Element => {
         data,
         {
           headers: {
-            Authorization: `Bearer ${token !== null && token !== '' ? token : ''}`
+            Authorization: `Bearer ${
+              token !== null && token !== '' ? token : ''
+            }`
           }
         }
       )
@@ -66,9 +75,24 @@ export const EditarBanner = (): JSX.Element => {
         }`
       }
     })
+    setValues({
+      ...values,
+      titulo: request.data.titulo,
+      subTitulo: request.data.subtitulo
+    })
     setImagen1(request.data.imagen1)
     setLoadingComponents(false)
   }
+
+  const { handleSubmit, handleChange, errors, values, touched, handleBlur, setValues } =
+    useFormik({
+      initialValues: {
+        titulo: '',
+        subTitulo: ''
+      },
+      validationSchema: ScheamaBanner,
+      onSubmit: upadateBanner
+    })
 
   return (
     <>
@@ -79,10 +103,32 @@ export const EditarBanner = (): JSX.Element => {
         : (
         <form
           className="bg-secondary-100 p-8 rounded-xl"
-          onSubmit={() => {
-            void upadateBanner()
-          }}
+          onSubmit={handleSubmit}
         >
+          <section className="w-full flex gap-2">
+            <div className="w-full lg:relative mb-5">
+              <TitleBriefs titulo="Titulo" />
+              <InputsBriefs
+                name="titulo"
+                type="text"
+                value={values.titulo}
+                onChange={handleChange}
+                onBlur={handleBlur}
+              />
+              <Errors errors={errors.titulo} touched={touched.titulo} />
+            </div>
+            <div className="w-full lg:relative mb-5">
+              <TitleBriefs titulo="Subtitulo" />
+              <InputsBriefs
+                name="subTitulo"
+                type="text"
+                value={values.subTitulo}
+                onChange={handleChange}
+                onBlur={handleBlur}
+              />
+              <Errors errors={errors.subTitulo} touched={touched.subTitulo} />
+            </div>
+          </section>
           <div className="flex flex-col md:flex-row md:items-center gap-y-2 mb-8">
             <div className="w-full md:w-1/4">
               <p>

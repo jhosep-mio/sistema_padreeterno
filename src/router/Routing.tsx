@@ -39,7 +39,7 @@ export const Routing = (): JSX.Element => {
             <Route path="productos/editar/:id" element={<EditarProducto />} />
 
             {/* CONFIGURACION */}
-            <Route path="configuracion" element={<EditarConfiguracion />} />
+            <Route path="configuracion/:id" element={<EditarConfiguracion/>} />
           </Route>
         </Routes>
       </AuthProvider>
