@@ -1,0 +1,25 @@
+import { useRef } from 'react'
+import JoditEditor from 'jodit-react'
+import { type editorValues } from './Interfaces'
+
+const Editor = ({ content, setContent }: editorValues): JSX.Element => {
+  const editor = useRef(null)
+
+  const config = {
+    readonly: false
+  }
+
+  return (
+        <JoditEditor
+            className='text-gray-300'
+            ref={editor}
+            value={content}
+            config={config}
+            // tabIndex={1}
+            onBlur={newContent => { setContent(newContent) }}
+            onChange={(newContent) => {}}
+        />
+  )
+}
+
+export default Editor
