@@ -119,6 +119,7 @@ export interface productosValuesModificate {
   nombre: string
   descripcion: string
   idCategoria: string
+  favoritos: string
 }
 
 // UPDATE-CREATE

@@ -80,6 +80,7 @@ export const CrearProducto = (): JSX.Element => {
     }
     data.append('caracteristicas', content)
     data.append('array_costo', JSON.stringify(array))
+    data.append('favoritos', values.favoritos)
 
     try {
       const respuesta = await axios.post(`${Global.url}/saveProducto`, data, {
@@ -158,7 +159,8 @@ export const CrearProducto = (): JSX.Element => {
       initialValues: {
         nombre: '',
         descripcion: '',
-        idCategoria: ''
+        idCategoria: '',
+        favoritos: ''
       },
       validationSchema: ScheamaProductos,
       onSubmit: saveCategoria
@@ -175,16 +177,36 @@ export const CrearProducto = (): JSX.Element => {
           className="bg-secondary-100 p-8 rounded-xl"
           onSubmit={handleSubmit}
         >
-          <div className="w-full lg:relative mb-5 flex flex-col justify-between gap-2">
-            <TitleBriefs titulo="Nombre del producto" />
-            <InputsBriefs
-              name="nombre"
-              type="text"
-              value={values.nombre}
-              onChange={handleChange}
-              onBlur={handleBlur}
-            />
-            <Errors errors={errors.nombre} touched={touched.nombre} />
+          <div className="w-full lg:relative mb-5 flex flex-row justify-between gap-2">
+            <div className="w-3/4">
+              <TitleBriefs titulo="Nombre del producto" />
+              <InputsBriefs
+                name="nombre"
+                type="text"
+                value={values.nombre}
+                onChange={handleChange}
+                onBlur={handleBlur}
+              />
+              <Errors errors={errors.nombre} touched={touched.nombre} />
+            </div>
+            <div className="w-1/4">
+              <TitleBriefs titulo="Favoritos" />
+              <select
+                className="border border-black  placeholder-gray-400 outline-none focus:outline-none
+                                                        focus:border-black w-full pt-4 pr-4 pb-4 pl-4 mt-2 mr-0 mb-0 ml-0 text-base block bg-secondary-900
+                                                        rounded-md transition-all"
+                name="favoritos"
+                value={values.favoritos}
+                autoComplete="off"
+                onChange={handleChange}
+                onBlur={handleBlur}
+              >
+                <option value="">Seleccionar</option>
+                <option value="true">Si</option>
+                <option value="false">No</option>
+              </select>
+              <Errors errors={errors.favoritos} touched={touched.favoritos} />
+            </div>
           </div>
 
           <div className="w-full lg:relative mb-5 flex justify-between gap-5">
@@ -212,6 +234,7 @@ export const CrearProducto = (): JSX.Element => {
                 touched={touched.idCategoria}
               />
             </div>
+
             <div className="w-1/2">
               <TitleBriefs titulo="Desccripción corta" />
               <InputsBriefs
@@ -313,7 +336,7 @@ export const CrearProducto = (): JSX.Element => {
               <div className="w-full md:w-52">
                 <button
                   type="button"
-                  className="w-full bg-green-500 text-black hover:bg-primary justify-center flex items-center gap-2 py-2 px-4 rounded-lg transition-colors"
+                  className="w-full bg-green-500 text-black hover:bg-green-600 justify-center flex items-center gap-2 py-2 px-4 rounded-lg transition-colors"
                   onClick={(): void => {
                     agregarArray()
                   }}
