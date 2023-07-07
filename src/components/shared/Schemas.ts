@@ -20,6 +20,9 @@ export const ScheamaProductos = Yup.object().shape({
   nombre: Yup.string().required('El campo es requerido'),
   descripcion: Yup.string().required('El campo es requerido'),
   idCategoria: Yup.number().required('El campo es requerido'),
+  precio: Yup.number().required('El campo es requerido').positive('El valor no puede ser negativo'),
+  cantidad: Yup.number().required('El campo es requerido').positive('El valor no puede ser negativo'),
+  oferta: Yup.number().required('El campo es requerido').positive('El valor no puede ser negativo'),
   favoritos: Yup.string().required('El campo es requerido')
 })
 
