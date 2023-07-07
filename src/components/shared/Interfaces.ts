@@ -119,6 +119,9 @@ export interface productosValuesModificate {
   nombre: string
   descripcion: string
   idCategoria: string
+  precio: string
+  cantidad: string
+  oferta: string
   favoritos: string
 }
 

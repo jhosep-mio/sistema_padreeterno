@@ -13,19 +13,14 @@ import { ImageUploader } from '../../../shared/ImageUploader'
 import {
   type productosValuesModificate,
   type ImagenState,
-  type categoriasValues,
-  type arrayValues
+  type categoriasValues
 } from '../../../shared/Interfaces'
 import { ScheamaProductos } from '../../../shared/Schemas'
 import Editor from '../../../shared/Editar'
-import { RiDeleteBin6Line } from 'react-icons/ri'
 
 export const CrearProducto = (): JSX.Element => {
   const token = localStorage.getItem('token')
   const navigate = useNavigate()
-  const [array, setArray] = useState<arrayValues[]>([
-    { id: null, medida: '', precio: '', cantidad: '', oferta: '' }
-  ])
   const [categorias, setCategorias] = useState([])
   const [content, setContent] = useState('')
   const { setTitle, loadingComponents, setLoadingComponents } = useAuth()
@@ -49,11 +44,6 @@ export const CrearProducto = (): JSX.Element => {
   })
   const [boton3, setBoton3] = useState(false)
   const [url3, setUrl3] = useState('')
-
-  const [medida, setMedida] = useState('')
-  const [precio, setPrecio] = useState('')
-  const [cantidad, setCantidad] = useState('')
-  const [oferta, setOferta] = useState('')
 
   useEffect(() => {
     setTitle('Registrar Producto')
@@ -79,7 +69,9 @@ export const CrearProducto = (): JSX.Element => {
       data.append('imagen3', imagen3.archivo)
     }
     data.append('caracteristicas', content)
-    data.append('array_costo', JSON.stringify(array))
+    data.append('precio', values.precio)
+    data.append('cantidad', values.cantidad)
+    data.append('oferta', values.oferta)
     data.append('favoritos', values.favoritos)
 
     try {
@@ -115,51 +107,15 @@ export const CrearProducto = (): JSX.Element => {
     setLoadingComponents(false)
   }
 
-  const agregarArray = (): void => {
-    if (medida && precio && cantidad && oferta) {
-      setArray([
-        ...array,
-        { id: Date.now(), medida, precio, cantidad, oferta }
-      ])
-      setMedida('')
-      setPrecio('')
-      setCantidad('')
-      setOferta('')
-    } else {
-      Swal.fire('Complete todos los campos', '', 'error')
-    }
-  }
-
-  const eliminarArray = (id: number | null): void => {
-    const nuevoArray = array.filter((peso) => peso.id !== id)
-    setArray(nuevoArray)
-  }
-
-  const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement>,
-    id: number | null,
-    fieldName: string
-  ): void => {
-    let value = e.target.value
-    if (fieldName === 'estado') {
-      value = String(parseInt(value, 10)) // Convertir el valor a una cadena
-    }
-
-    const updatedArray = array.map((pro: arrayValues) => {
-      if (pro.id === id) {
-        return { ...pro, [fieldName]: value }
-      }
-      return pro
-    })
-    setArray(updatedArray)
-  }
-
   const { handleSubmit, handleChange, errors, values, touched, handleBlur } =
     useFormik({
       initialValues: {
         nombre: '',
         descripcion: '',
         idCategoria: '',
+        precio: '',
+        cantidad: '',
+        oferta: '',
         favoritos: ''
       },
       validationSchema: ScheamaProductos,
@@ -236,7 +192,7 @@ export const CrearProducto = (): JSX.Element => {
             </div>
 
             <div className="w-1/2">
-              <TitleBriefs titulo="Desccripción corta" />
+              <TitleBriefs titulo="Descripción corta" />
               <InputsBriefs
                 name="descripcion"
                 type="text"
@@ -248,6 +204,44 @@ export const CrearProducto = (): JSX.Element => {
                 errors={errors.descripcion}
                 touched={touched.descripcion}
               />
+            </div>
+          </div>
+
+          <div className="w-full lg:relative mb-5 flex justify-between gap-5">
+            <div className="w-1/3">
+              <TitleBriefs titulo="Precio normal" />
+              <InputsBriefs
+                name="precio"
+                type="number"
+                value={values.precio}
+                onChange={handleChange}
+                onBlur={handleBlur}
+              />
+              <Errors errors={errors.precio} touched={touched.precio} />
+            </div>
+
+            <div className="w-1/3">
+              <TitleBriefs titulo="Precio sin descuento" />
+              <InputsBriefs
+                name="oferta"
+                type="number"
+                value={values.oferta}
+                onChange={handleChange}
+                onBlur={handleBlur}
+              />
+              <Errors errors={errors.oferta} touched={touched.oferta} />
+            </div>
+
+            <div className="w-1/3">
+              <TitleBriefs titulo="Cantidad" />
+              <InputsBriefs
+                name="cantidad"
+                type="number"
+                value={values.cantidad}
+                onChange={handleChange}
+                onBlur={handleBlur}
+              />
+              <Errors errors={errors.cantidad} touched={touched.cantidad} />
             </div>
           </div>
 
@@ -281,153 +275,6 @@ export const CrearProducto = (): JSX.Element => {
                 clase="3"
               />
             </div>
-          </div>
-
-          <div className="flex flex-col md:flex-row md:items-center gap-y-2 mb-0 relative">
-            <p className="bg-transparent pt-0 pb-0 lg:pl-2  mr-0 mb-0 font-medium text-white text-md lg:absolute py-2 rounded-md top-[-25px]">
-              Costo del producto
-            </p>
-            <div className="flex-1 flex-col md:flex-row flex items-center gap-4 border-">
-              <div className="w-full">
-                <input
-                  type="text"
-                  className="w-full py-2 px-4 outline-none rounded-lg bg-secondary-900"
-                  placeholder="Medida, Talla, Color"
-                  value={medida}
-                  onChange={(e) => {
-                    setMedida(e.target.value)
-                  }}
-                />
-              </div>
-              <div className="w-full">
-                <input
-                  type="number"
-                  step={0.1}
-                  className="w-full py-2 px-4 outline-none rounded-lg bg-secondary-900"
-                  placeholder="Precio"
-                  value={precio}
-                  onChange={(e) => {
-                    setPrecio(e.target.value)
-                  }}
-                />
-              </div>
-              <div className="w-full">
-                <input
-                  type="number"
-                  className="w-full py-2 px-4 outline-none rounded-lg bg-secondary-900"
-                  placeholder="Cantidad"
-                  value={cantidad}
-                  onChange={(e) => {
-                    setCantidad(e.target.value)
-                  }}
-                />
-              </div>
-              <div className="w-full">
-                <input
-                  type="number"
-                  className="w-full py-2 px-4 outline-none rounded-lg bg-secondary-900"
-                  placeholder="Oferta"
-                  value={oferta}
-                  onChange={(e) => {
-                    setOferta(e.target.value)
-                  }}
-                />
-              </div>
-              <div className="w-full md:w-52">
-                <button
-                  type="button"
-                  className="w-full bg-green-500 text-black hover:bg-green-600 justify-center flex items-center gap-2 py-2 px-4 rounded-lg transition-colors"
-                  onClick={(): void => {
-                    agregarArray()
-                  }}
-                >
-                  Agregar
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <div className="bg-secondary-100 py-4 md:p-8 rounded-xl mb-10">
-            <div className="hidden md:grid grid-cols-1 md:grid-cols-5 gap-4 mb-5 p-4">
-              <h5 className="md:text-center">Medida</h5>
-              <h5 className="md:text-center">Precio</h5>
-              <h5 className="md:text-center">Cantidad</h5>
-              <h5 className="md:text-center">Oferta</h5>
-              <h5 className="md:text-center">Acciones</h5>
-            </div>
-            {array.map((pro) => (
-              <div
-                className="grid grid-cols-1 md:grid-cols-5 gap-4 items-center mb-4 bg-secondary-900 p-4 rounded-xl"
-                key={pro.id}
-              >
-                <div className="md:text-center">
-                  <h5 className="md:hidden text-white font-bold mb-2">
-                    Medida
-                  </h5>
-                  <input
-                    className="line-clamp-1 bg-transparent border-none outline-none text-center w-full"
-                    type="text"
-                    value={pro.medida}
-                    onChange={(e) => {
-                      handleInputChange(e, pro.id, 'medida')
-                    }}
-                  />
-                </div>
-                <div className="md:text-center">
-                  <h5 className="md:hidden text-white font-bold mb-2">
-                    Precio
-                  </h5>
-                  <input
-                    className="line-clamp-1 bg-transparent border-none outline-none text-center w-full"
-                    type="number"
-                    value={pro.precio}
-                    onChange={(e) => {
-                      handleInputChange(e, pro.id, 'precio')
-                    }}
-                  />
-                </div>
-                <div className="md:text-center">
-                  <h5 className="md:hidden text-white font-bold mb-2">
-                    Cantidad
-                  </h5>
-                  <input
-                    className="line-clamp-1 bg-transparent border-none outline-none text-center w-full"
-                    type="number"
-                    value={pro.cantidad}
-                    onChange={(e) => {
-                      handleInputChange(e, pro.id, 'cantidad')
-                    }}
-                  />
-                </div>
-                <div className="md:text-center">
-                  <h5 className="md:hidden text-white font-bold mb-2">
-                    Oferta
-                  </h5>
-                  <input
-                    className="line-clamp-1 bg-transparent border-none outline-none text-center w-full"
-                    type="number"
-                    value={pro.oferta}
-                    onChange={(e) => {
-                      handleInputChange(e, pro.id, 'oferta')
-                    }}
-                  />
-                </div>
-
-                <div className="md:text-center md:flex md:justify-center">
-                  <h5 className="md:hidden text-white font-bold mb-2">
-                    Acciones
-                  </h5>
-                  {array.length > 1 && (
-                    <RiDeleteBin6Line
-                      className="cursor-pointer"
-                      onClick={() => {
-                        eliminarArray(pro.id)
-                      }}
-                    />
-                  )}
-                </div>
-              </div>
-            ))}
           </div>
 
           <div className="flex flex-col md:flex-row md:items-center gap-y-2 mb-10 relative">
