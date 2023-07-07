@@ -49,13 +49,13 @@ export const Login = (): JSX.Element | undefined => {
       try {
         const respuesta = await axios.post(`${Global.url}/login`, data)
 
-        if (respuesta.data.status === 'success') {
+        if (respuesta.data.status == 'success') {
           setLoged('login')
           localStorage.setItem('token', respuesta.data.acces_token)
           localStorage.setItem('user', JSON.stringify(respuesta.data.user))
           setAuth(respuesta.data.user)
           navigate('/admin', { replace: true })
-        } else if (respuesta.data.status === 'invalid') {
+        } else if (respuesta.data.status == 'invalid') {
           console.log('contraseña incorrecta')
           setLoged('invalid')
         } else {
@@ -156,15 +156,15 @@ export const Login = (): JSX.Element | undefined => {
             </div>
 
             <div className="mt-3 mb-8">
-              {loged === 'invalid'
+              {loged == 'invalid'
                 ? (
                 <p className="text-main">Contraseña incorrecta</p>
                   )
-                : loged === 'noexiste'
+                : loged == 'noexiste'
                   ? (
                 <p className="text-main">El usuario no existe</p>
                     )
-                  : loged === 'login'
+                  : loged == 'login'
                     ? (
                 <p className="text-green-500">
                   Usuario identificado correctamente

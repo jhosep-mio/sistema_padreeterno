@@ -83,7 +83,7 @@ export const CrearProducto = (): JSX.Element => {
         }
       })
 
-      if (respuesta.data.status === 'success') {
+      if (respuesta.data.status == 'success') {
         Swal.fire('Agregado correctamente', '', 'success')
         navigate('/admin/productos')
       } else {

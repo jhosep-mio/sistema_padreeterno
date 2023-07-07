@@ -13,6 +13,8 @@ import { ListaProductos } from '../components/private/tables/productos/ListaProd
 import { CrearProducto } from '../components/private/tables/productos/CrearProducto'
 import { EditarProducto } from '../components/private/tables/productos/EditarProducto'
 import { EditarConfiguracion } from '../components/private/tables/configuracion/EditarConfiguracion'
+import { ListaTransacciones } from '../components/private/tables/transacciones/ListaTransacciones'
+import { EditarTransaccion } from '../components/private/tables/transacciones/EditarTransaccion'
 
 export const Routing = (): JSX.Element => {
   return (
@@ -39,8 +41,11 @@ export const Routing = (): JSX.Element => {
             <Route path="productos/editar/:id" element={<EditarProducto />} />
 
             {/* CONFIGURACION */}
-            <Route path="configuracion/:id" element={<EditarConfiguracion/>} />
+            <Route path="configuracion/:id" element={<EditarConfiguracion />} />
+            <Route path="transacciones" element={<ListaTransacciones />} />
+            <Route path="transacciones/viewTransaccion/:id" element={<EditarTransaccion />} />
           </Route>
+          <Route path="*" element={<>Error 404</>} />
         </Routes>
       </AuthProvider>
     </BrowserRouter>

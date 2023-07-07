@@ -1,4 +1,4 @@
 export const Global = {
-  url: 'http://192.168.0.109:8001/api',
-  urlImages: 'http://192.168.0.109:8001'
+  url: 'http://127.0.0.1:8000/api',
+  urlImages: 'http://127.0.0.1:8000'
 }
