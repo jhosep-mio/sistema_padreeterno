@@ -23,7 +23,7 @@ export const DeleteItems = ({ ruta, id, token, getData, totalPosts, cantidadRegi
                 }
         )
 
-        if (resultado.data.status === 'success') {
+        if (resultado.data.status == 'success') {
           Swal.fire('Registro eliminado correctamente', '', 'success')
           getData()
           setTimeout(() => {

@@ -48,7 +48,7 @@ export const EditarConfiguracion = (): JSX.Element => {
         }
       })
 
-      if (respuesta.data.status === 'success') {
+      if (respuesta.data.status == 'success') {
         Swal.fire('Actualizado correctamente', '', 'success')
       } else {
         Swal.fire('Error al realizar la edicion', '', 'error')

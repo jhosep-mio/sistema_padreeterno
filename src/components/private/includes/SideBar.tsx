@@ -96,7 +96,7 @@ const SideBar = (): JSX.Element => {
                   <Link
                     to="banners"
                     className={`py-2 px-4 border-l border-gray-500 ml-6 block relative before:w-3 before:h-3 before:absolute ${
-                      activeItem === 4 ? 'before:bg-main' : 'before:bg-gray-500'
+                      activeItem == 4 ? 'before:bg-main' : 'before:bg-gray-500'
                     } before:rounded-full before:-left-[6.5px] before:top-1/2 before:-translate-y-1/2 before:border-4 before:border-secondary-100 hover:text-white transition-colors`}
                     onClick={() => {
                       handleItemClick(4)
@@ -132,7 +132,7 @@ const SideBar = (): JSX.Element => {
                   <Link
                     to="categorias"
                     className={`py-2 px-4 border-l border-gray-500 ml-6 block relative before:w-3 before:h-3 before:absolute ${
-                      activeItem === 99
+                      activeItem == 99
                         ? 'before:bg-main'
                         : 'before:bg-gray-500'
                     } before:rounded-full before:-left-[6.5px] before:top-1/2 before:-translate-y-1/2 before:border-4 before:border-secondary-100 hover:text-white transition-colors`}
@@ -148,7 +148,7 @@ const SideBar = (): JSX.Element => {
                   <Link
                     to="productos"
                     className={`py-2 px-4 border-l border-gray-500 ml-6 block relative before:w-3 before:h-3 before:absolute ${
-                      activeItem === 97
+                      activeItem == 97
                         ? 'before:bg-main'
                         : 'before:bg-gray-500'
                     } before:rounded-full before:-left-[6.5px] before:top-1/2 before:-translate-y-1/2 before:border-4 before:border-secondary-100 hover:text-white transition-colors`}
@@ -163,10 +163,18 @@ const SideBar = (): JSX.Element => {
             </li>
             <li>
               <Link
-                to="configuracion"
+                to="configuracion/1"
                 className="flex items-center gap-4 py-2 px-4 rounded-lg text-white hover:bg-secondary-900 transition-colors"
               >
                 <RiStackFill className="text-main" /> Configuracion
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="transacciones"
+                className="flex items-center gap-4 py-2 px-4 rounded-lg text-white hover:bg-secondary-900 transition-colors"
+              >
+                <RiStackFill className="text-main" /> Transacciones
               </Link>
             </li>
           </ul>

@@ -94,7 +94,7 @@ export const EditarProducto = (): JSX.Element => {
         }
       )
 
-      if (respuesta.data.status === 'success') {
+      if (respuesta.data.status == 'success') {
         Swal.fire('Actualizado correctamente', '', 'success')
         navigate('/admin/productos')
       } else {

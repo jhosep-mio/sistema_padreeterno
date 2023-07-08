@@ -1,3 +1,20 @@
+export interface valuesTransaccion {
+  id: number
+  id_transaccion: number
+  nombres: string
+  apellidos: string
+  status: string
+  tipo: string
+  order_id: string
+  email: string
+  celular: string
+  comentario: string | null
+  delivery: string
+  total_pago: string
+  array_productos: string
+  estado: number
+}
+
 export interface configuracionValues {
   telefono: string
   celular1: string

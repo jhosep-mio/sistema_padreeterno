@@ -72,3 +72,21 @@ export const ScheamaBanner = Yup.object().shape({
   titulo: Yup.string().required('El campo es requerido'),
   subTitulo: Yup.string().required('El campo es requerido')
 })
+
+// TRANSACCIONES
+
+export const SchemaTransacciones = Yup.object().shape({
+  id_transaccion: Yup.number().required('El campo es requerido'),
+  nombres: Yup.string().required('El campo es requerido'),
+  apellidos: Yup.string().required('El campo es requerido'),
+  status: Yup.string().required('El campo es requerido'),
+  tipo: Yup.string().required('El campo es requerido'),
+  order_id: Yup.string().required('El campo es requerido'),
+  email: Yup.string().required('El campo es requerido'),
+  celular: Yup.string().required('El campo es requerido'),
+  comentario: Yup.string().nullable(),
+  delivery: Yup.string().required('El campo es requerido'),
+  total_pago: Yup.string().required('El campo es requerido'),
+  array_productos: Yup.string().required('El campo es requerido'),
+  estado: Yup.number().required('El campo es requerido')
+})

@@ -50,7 +50,7 @@ export const EditarCategoria = (): JSX.Element => {
         }
       })
 
-      if (respuesta.data.status === 'success') {
+      if (respuesta.data.status == 'success') {
         Swal.fire('Actualizado correctamente', '', 'success')
         navigate('/admin/categorias')
       } else {
