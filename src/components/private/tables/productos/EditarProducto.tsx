@@ -174,8 +174,8 @@ export const EditarProducto = (): JSX.Element => {
           className="bg-secondary-100 p-8 rounded-xl"
           onSubmit={handleSubmit}
         >
-          <div className="w-full lg:relative mb-5 flex flex-row justify-between gap-2">
-            <div className="w-3/4">
+          <div className="w-full lg:relative mb-5 flex flex-col lg:flex-row justify-between gap-2">
+            <div className="w-full lg:w-3/4">
               <TitleBriefs titulo="Nombre del producto" />
               <InputsBriefs
                 name="nombre"
@@ -186,7 +186,7 @@ export const EditarProducto = (): JSX.Element => {
               />
               <Errors errors={errors.nombre} touched={touched.nombre} />
             </div>
-            <div className="w-1/4">
+            <div className="w-full lg:w-1/4">
               <TitleBriefs titulo="Favoritos" />
               <select
                 className="border border-black  placeholder-gray-400 outline-none focus:outline-none
@@ -206,8 +206,8 @@ export const EditarProducto = (): JSX.Element => {
             </div>
           </div>
 
-          <div className="w-full lg:relative mb-5 flex justify-between gap-5">
-            <div className="w-1/2">
+          <div className="w-full lg:relative mb-5 flex flex-col lg:flex-row justify-between gap-5">
+            <div className="w-full lg:w-1/2">
               <TitleBriefs titulo="Asignar categoria" />
               <select
                 className="border border-black  placeholder-gray-400 outline-none focus:outline-none
@@ -231,7 +231,7 @@ export const EditarProducto = (): JSX.Element => {
                 touched={touched.idCategoria}
               />
             </div>
-            <div className="w-1/2">
+            <div className="w-full lg:w-1/2">
               <TitleBriefs titulo="Desccripción corta" />
               <InputsBriefs
                 name="descripcion"
@@ -247,8 +247,8 @@ export const EditarProducto = (): JSX.Element => {
             </div>
           </div>
 
-          <div className="w-full lg:relative mb-5 flex justify-between gap-5">
-            <div className="w-1/3">
+          <div className="w-full lg:relative mb-5 flex flex-col lg:flex-row justify-between gap-5">
+            <div className="w-full lg:w-1/3">
               <TitleBriefs titulo="Precio normal" />
               <InputsBriefs
                 name="precio"
@@ -260,7 +260,7 @@ export const EditarProducto = (): JSX.Element => {
               <Errors errors={errors.precio} touched={touched.precio} />
             </div>
 
-            <div className="w-1/3">
+            <div className="w-full lg:w-1/3">
               <TitleBriefs titulo="Precio sin descuento" />
               <InputsBriefs
                 name="oferta"
@@ -272,7 +272,7 @@ export const EditarProducto = (): JSX.Element => {
               <Errors errors={errors.oferta} touched={touched.oferta} />
             </div>
 
-            <div className="w-1/3">
+            <div className="w-full lg:w-1/3">
               <TitleBriefs titulo="Cantidad" />
               <InputsBriefs
                 name="cantidad"
@@ -289,7 +289,7 @@ export const EditarProducto = (): JSX.Element => {
             <p className="bg-secondary-100 pt-0 pb-0 lg:pl-2  mr-0 mb-0 font-medium text-white text-md lg:absolute py-2 rounded-md top-[-10px]">
               Imagenes del producto<span className="text-red-500">*</span>
             </p>
-            <div className="flex-1 flex  items-center gap-4">
+            <div className="flex-1 flex flex-col lg:flex-row items-center gap-4">
               <ImageUpdate
                 globalUrl="productos"
                 url={url1}

@@ -82,7 +82,7 @@ const CardTicket = (props: Props): JSX.Element => {
           to={agregar}
           className="flex items-center gap-2 text-white hover:underline"
         >
-          <RiAddLine /> Agregar {button}
+          <RiAddLine />  {button}
         </Link>
       </div>
     </div>

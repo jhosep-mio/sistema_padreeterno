@@ -27,7 +27,9 @@ export const EditarTransaccion = (): JSX.Element => {
     })
   }, [])
 
-  const updateTransaccion = async (values: valuesTransaccion): Promise<void> => {
+  const updateTransaccion = async (
+    values: valuesTransaccion
+  ): Promise<void> => {
     setLoadingComponents(true)
     const token = localStorage.getItem('token')
     const data = new FormData()
@@ -129,8 +131,8 @@ export const EditarTransaccion = (): JSX.Element => {
           <h2 className="text-white text-2xl font-bold mb-10 text-center w-full">
             DATOS DEL CLIENTE
           </h2>
-          <div className="w-full lg:relative mb-5 flex flex-row justify-between gap-2">
-            <div className="w-1/3">
+          <div className="w-full lg:relative mb-5 flex flex-col lg:flex-row justify-between gap-3">
+            <div className="w-full lg:w-1/3">
               <TitleBriefs titulo="Nombres" />
               <InputsBriefsView
                 name="nombres"
@@ -141,7 +143,7 @@ export const EditarTransaccion = (): JSX.Element => {
               />
               <Errors errors={errors.nombres} touched={touched.nombres} />
             </div>
-            <div className="w-1/3">
+            <div className="w-full lg:w-1/3">
               <TitleBriefs titulo="Apellidos" />
               <InputsBriefsView
                 name="apellidos"
@@ -152,7 +154,7 @@ export const EditarTransaccion = (): JSX.Element => {
               />
               <Errors errors={errors.apellidos} touched={touched.apellidos} />
             </div>
-            <div className="w-1/3">
+            <div className="w-full lg:w-1/3">
               <TitleBriefs titulo="Email" />
               <InputsBriefsView
                 name="email"
@@ -165,8 +167,8 @@ export const EditarTransaccion = (): JSX.Element => {
             </div>
           </div>
 
-          <div className="w-full lg:relative mb-5 flex flex-row justify-between gap-2">
-            <div className="w-1/3">
+          <div className="w-full lg:relative mb-5 flex flex-col lg:flex-row justify-between gap-2">
+            <div className="w-full lg:w-1/3">
               <TitleBriefs titulo="Celular" />
               <InputsBriefsView
                 name="celular"
@@ -177,23 +179,50 @@ export const EditarTransaccion = (): JSX.Element => {
               />
               <Errors errors={errors.celular} touched={touched.celular} />
             </div>
-            <div className="w-2/3">
-              <TitleBriefs titulo="ESTADO DE ATENCION" />
-              <select
-                className={`border border-black  placeholder-gray-400 outline-none focus:outline-none
+            {values.status == 'approved'
+              ? (
+              <div className="w-full lg:w-2/3">
+                <TitleBriefs titulo="ESTADO DE ATENCION" />
+                <select
+                  className={`border border-black  placeholder-gray-400 outline-none focus:outline-none
                                                         focus:border-black w-full pt-4 pr-4 pb-4 pl-4 mt-2 mr-0 mb-0 ml-0 text-base block bg-secondary-900
-                                                        rounded-md transition-all ${values.estado == 0 ? 'text-green-400' : values.estado == 1 ? 'text-main' : ''}`}
-                name="estado"
-                value={values.estado}
-                autoComplete="off"
-                onChange={handleChange}
-                onBlur={handleBlur}
-              >
-                <option value="0" className='text-green-400'>PENDIENTE</option>
-                <option value="1" className='text-main'>TERMINADO</option>
-              </select>
-              <Errors errors={errors.estado} touched={touched.estado} />
-            </div>
+                                                        rounded-md transition-all ${
+                                                          values.estado == 0
+                                                            ? 'text-green-400'
+                                                            : values.estado == 1
+                                                            ? 'text-main'
+                                                            : ''
+                                                        }`}
+                  name="estado"
+                  value={values.estado}
+                  autoComplete="off"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                >
+                  <option value="0" className="text-green-400">
+                    PENDIENTE
+                  </option>
+                  <option value="1" className="text-main">
+                    TERMINADO
+                  </option>
+                </select>
+                <Errors errors={errors.estado} touched={touched.estado} />
+              </div>
+                )
+              : (
+              <div className="w-full lg:w-2/3">
+                <TitleBriefs titulo="ESTADO DE ATENCION" />
+                <input
+                  className="border border-red-500  placeholder-gray-400 outline-none focus:outline-none
+                                                      focus:border-black w-full pt-4 pr-4 pb-4 pl-4 mt-2 mr-0 mb-0 ml-0 text-base block bg-red-500
+                                                      rounded-md transition-all"
+                  type="text"
+                  value="RECHAZADO"
+                  autoComplete="off"
+                  disabled
+                />
+              </div>
+                )}
           </div>
 
           <div className="w-full lg:relative mb-5 flex flex-row justify-between gap-2">
@@ -214,8 +243,8 @@ export const EditarTransaccion = (): JSX.Element => {
             DATOS DE LA TRANSACCIÓN
           </h2>
 
-          <div className="w-full lg:relative mb-5 flex flex-row justify-between gap-2">
-            <div className="w-1/3">
+          <div className="w-full lg:relative mb-5 flex flex-col lg:flex-row justify-between gap-2">
+            <div className="w-full lg:w-1/3">
               <TitleBriefs titulo="ID de la transaccion" />
               <InputsBriefsView
                 name="id_transaccion"
@@ -229,7 +258,7 @@ export const EditarTransaccion = (): JSX.Element => {
                 touched={touched.id_transaccion}
               />
             </div>
-            <div className="w-1/3">
+            <div className="w-full lg:w-1/3">
               <TitleBriefs titulo="Estado de compra" />
               <InputsBriefsView
                 name="status"
@@ -240,7 +269,7 @@ export const EditarTransaccion = (): JSX.Element => {
               />
               <Errors errors={errors.status} touched={touched.status} />
             </div>
-            <div className="w-1/3">
+            <div className="w-full lg:w-1/3">
               <TitleBriefs titulo="Id de Orden" />
               <InputsBriefsView
                 name="order_id"
@@ -299,20 +328,22 @@ export const EditarTransaccion = (): JSX.Element => {
                     <h5 className="md:hidden text-white font-bold mb-2">
                       Subtotal
                     </h5>
-                    <span>S./ {(parseFloat(pro.unit_price) * pro.quantity).toFixed(2)}</span>
+                    <span>
+                      S./{' '}
+                      {(parseFloat(pro.unit_price) * pro.quantity).toFixed(2)}
+                    </span>
                   </div>
                 </div>
               ))}
           </div>
-          <div className="w-full lg:relative mb-5 flex flex-row justify-between gap-2">
-            <div className="flex flex-col w-1/2">
-
+          <div className="w-full lg:relative mb-5 flex flex-col lg:flex-row justify-between gap-10 lg:gap-2">
+            <div className="flex flex-col w-full lg:w-1/2">
               <div className="flex w-96">
                 <strong className="w-1/2">Pago final :</strong>
                 <p className="w-1/2">S./ {values.total_pago} </p>
               </div>
             </div>
-            <div className="w-1/2 flex items-center justify-center">
+            <div className="w-full lg:w-1/2 flex items-center justify-center">
               <strong>
                 Verificar el pago final con el monto abonado en mercado pago,
                 puede indentificarlo con el ID de la transaccion

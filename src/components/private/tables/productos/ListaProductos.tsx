@@ -74,8 +74,8 @@ export const ListaProductos = (): JSX.Element => {
         <div>
           {/* <h1 className="font-bold text-gray-100 text-xl">Lista de Productos</h1> */}
         </div>
-        <div className="w-full flex items-center justify-between gap-4">
-          <button className="bg-secondary-100/50 hover:bg-secondary-100 w-2/3 md:w-fit flex items-center  gap-2 py-2 px-4 rounded-lg hover:text-white transition-colors">
+        <div className="w-full flex flex-col lg:flex-row items-center justify-between gap-4">
+          <button className="bg-secondary-100/50 hover:bg-secondary-100  w-full md:w-fit flex items-center  gap-2 py-2 px-4 rounded-lg hover:text-white transition-colors">
             <RiFilter2Fill />
             <input
               placeholder="Buscar ..."
@@ -102,7 +102,7 @@ export const ListaProductos = (): JSX.Element => {
             </button>
           </button>
           <button
-            className="bg-main text-white hover:bg-main w-1/3 md:w-fit flex items-center gap-2 py-2 px-4 rounded-lg transition-colors"
+            className="bg-main text-white hover:bg-main w-full lg:w-fit flex items-center justify-center gap-2 py-2 px-4 rounded-lg transition-colors"
             onClick={() => {
               navigate('agregar')
             }}

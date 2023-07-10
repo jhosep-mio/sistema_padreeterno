@@ -132,8 +132,8 @@ export const EditarConfiguracion = (): JSX.Element => {
           <h2 className="text-main text-2xl font-bold text-center mb-10">
             Configuracion General
           </h2>
-          <section className="w-full flex gap-2">
-            <div className="w-1/3 lg:relative mb-5">
+          <section className="w-full flex flex-col lg:flex-row gap-2">
+            <div className="w-full lg:w-1/3 lg:relative mb-5">
               <TitleBriefs titulo="Telefono" />
               <InputsBriefs
                 name="telefono"
@@ -144,7 +144,7 @@ export const EditarConfiguracion = (): JSX.Element => {
               />
               <Errors errors={errors.telefono} touched={touched.telefono} />
             </div>
-            <div className="w-1/3 lg:relative mb-5">
+            <div className="w-full lg:w-1/3 lg:relative mb-5">
               <TitleBriefs titulo="Celular 1" />
               <InputsBriefs
                 name="celular1"
@@ -155,7 +155,7 @@ export const EditarConfiguracion = (): JSX.Element => {
               />
               <Errors errors={errors.celular1} touched={touched.celular1} />
             </div>
-            <div className="w-1/3 lg:relative mb-5">
+            <div className="w-full lg:w-1/3 lg:relative mb-5">
               <TitleBriefs titulo="Celular 2" />
               <InputsBriefs
                 name="celular2"
@@ -168,8 +168,8 @@ export const EditarConfiguracion = (): JSX.Element => {
             </div>
           </section>
 
-          <section className="w-full flex gap-2">
-            <div className="w-1/2 lg:relative mb-5">
+          <section className="w-full flex flex-col lg:flex-row gap-2">
+            <div className="w-full lg:w-1/2 lg:relative mb-5">
               <TitleBriefs titulo="Correo electronico 1" />
               <InputsBriefs
                 name="correo1"
@@ -180,7 +180,7 @@ export const EditarConfiguracion = (): JSX.Element => {
               />
               <Errors errors={errors.correo1} touched={touched.correo1} />
             </div>
-            <div className="w-1/2 lg:relative mb-5">
+            <div className="w-full lg:w-1/2 lg:relative mb-5">
               <TitleBriefs titulo="Correo electronico 2" />
               <InputsBriefs
                 name="correo2"
@@ -193,8 +193,8 @@ export const EditarConfiguracion = (): JSX.Element => {
             </div>
           </section>
 
-          <section className="w-full flex gap-2">
-            <div className="w-1/2 lg:relative mb-5">
+          <section className="w-full flex  flex-col lg:flex-row gap-2">
+            <div className="w-full lg:w-1/2 lg:relative mb-5">
               <TitleBriefs titulo="Horario 1" />
               <InputsBriefs
                 name="horario1"
@@ -205,7 +205,7 @@ export const EditarConfiguracion = (): JSX.Element => {
               />
               <Errors errors={errors.horario1} touched={touched.horario1} />
             </div>
-            <div className="w-1/2 lg:relative mb-5">
+            <div className="w-full lg:w-1/2 lg:relative mb-5">
               <TitleBriefs titulo="Horario 2" />
               <InputsBriefs
                 name="horario2"

@@ -12,8 +12,10 @@ const Home = (): JSX.Element => {
   const { auth, setTitle } = useAuth()
   const [categorias, setCategorias] = useState(0)
   const [productos, setProductos] = useState(0)
+  const [transacciones, setTransacciones] = useState(0)
   const [promociones, setPromociones] = useState(0)
   const [loading, setLoading] = useState(false)
+  const token = localStorage.getItem('token')
 
   const getAllCategories = async (): Promise<void> => {
     setLoading(true)
@@ -29,6 +31,15 @@ const Home = (): JSX.Element => {
   const getALlProductos = async (): Promise<void> => {
     const request = await axios.get(`${Global.url}/allProductos`)
     setProductos(request.data.length)
+  }
+
+  const getAllTransacciones = async (): Promise<void> => {
+    const request = await axios.get(`${Global.url}/getTransacciones`, {
+      headers: {
+        Authorization: `Bearer ${token !== null && token !== '' ? token : ''}`
+      }
+    })
+    setTransacciones(request.data.length)
     setLoading(false)
   }
 
@@ -50,6 +61,7 @@ const Home = (): JSX.Element => {
     getAllCategories()
     getAllBanners()
     getALlProductos()
+    getAllTransacciones()
   }, [])
 
   return (
@@ -67,7 +79,7 @@ const Home = (): JSX.Element => {
             ruta="productos"
             tabla="Productos"
             dashboard="Productos"
-            button="nuevo Producto"
+            button="Nuevo Producto"
             agregar="productos/agregar"
           />
           <CardTicket
@@ -76,7 +88,7 @@ const Home = (): JSX.Element => {
             totalTickets={categorias}
             tabla="Categorias"
             dashboard="Productos"
-            button="nueva Categoria"
+            button="Nueva Categoria"
             agregar="categorias/agregar"
           />
           <CardTicket
@@ -85,8 +97,17 @@ const Home = (): JSX.Element => {
             totalTickets={promociones}
             tabla="Banners"
             dashboard="Productos"
-            button="nuevo Banner"
+            button="Nuevo Banner"
             agregar="banners/agregar"
+          />
+          <CardTicket
+            ticket="total"
+            ruta="transacciones"
+            totalTickets={transacciones}
+            tabla="Transacciones"
+            dashboard="Productos"
+            button="Lista de transacciones"
+            agregar="transacciones"
           />
           {/* <CardTicket
             ticket="inProcess"

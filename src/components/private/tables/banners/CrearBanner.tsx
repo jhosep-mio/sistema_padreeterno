@@ -81,7 +81,7 @@ export const CrearBanner = (): JSX.Element => {
           className="bg-secondary-100 p-8 rounded-xl"
           onSubmit={handleSubmit}
         >
-          <section className="w-full flex gap-2">
+          <section className="w-full flex flex-col lg:flex-row gap-2">
             <div className="w-full lg:relative mb-5">
               <TitleBriefs titulo="Titulo" />
               <InputsBriefs
