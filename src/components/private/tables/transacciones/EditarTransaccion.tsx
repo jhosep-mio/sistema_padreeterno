@@ -281,39 +281,32 @@ export const EditarTransaccion = (): JSX.Element => {
                     <h5 className="md:hidden text-white font-bold mb-2">
                       Nombre
                     </h5>
-                    <span>{pro.nombre}</span>
+                    <span>{pro.title}</span>
                   </div>
                   <div className="md:text-center">
                     <h5 className="md:hidden text-white font-bold mb-2">
                       Cantidad
                     </h5>
-                    <span>{pro.cantidad}</span>
+                    <span>{pro.quantity}</span>
                   </div>
                   <div className="md:text-center">
                     <h5 className="md:hidden text-white font-bold mb-2">
                       Precio
                     </h5>
-                    <span>S./ {pro.precio}</span>
+                    <span>S./ {pro.unit_price}</span>
                   </div>
                   <div className="md:text-center">
                     <h5 className="md:hidden text-white font-bold mb-2">
                       Subtotal
                     </h5>
-                    <span>S./ {(parseFloat(pro.precio) * pro.cantidad).toFixed(2)}</span>
+                    <span>S./ {(parseFloat(pro.unit_price) * pro.quantity).toFixed(2)}</span>
                   </div>
                 </div>
               ))}
           </div>
           <div className="w-full lg:relative mb-5 flex flex-row justify-between gap-2">
             <div className="flex flex-col w-1/2">
-              <div className="flex w-96">
-                <strong className="w-1/2">Subtotal de compra :</strong>
-                <p className="w-1/2">S./ {(parseFloat(values.total_pago) - parseFloat(values.delivery)).toFixed(2)}</p>
-              </div>
-              <div className="flex w-96">
-                <strong className="w-1/2">Delivery :</strong>
-                <p className="w-1/2">S./ {values.delivery}</p>
-              </div>
+
               <div className="flex w-96">
                 <strong className="w-1/2">Pago final :</strong>
                 <p className="w-1/2">S./ {values.total_pago} </p>
