@@ -15,6 +15,12 @@ import { EditarProducto } from '../components/private/tables/productos/EditarPro
 import { EditarConfiguracion } from '../components/private/tables/configuracion/EditarConfiguracion'
 import { ListaTransacciones } from '../components/private/tables/transacciones/ListaTransacciones'
 import { EditarTransaccion } from '../components/private/tables/transacciones/EditarTransaccion'
+import { ListaDepartamentos } from '../components/private/tables/departamentos/ListaDepartamentos'
+import { CrearDepartamento } from '../components/private/tables/departamentos/CrearDepartamento'
+import { EditarDepartamento } from '../components/private/tables/departamentos/EditarDepartamento'
+import { ListaDistritos } from '../components/private/tables/distritos/ListaDistritos'
+import { CrearDistrito } from '../components/private/tables/distritos/CrearDistrito'
+import { EditarDistrito } from '../components/private/tables/distritos/EditarDistrito'
 
 export const Routing = (): JSX.Element => {
   return (
@@ -44,6 +50,17 @@ export const Routing = (): JSX.Element => {
             <Route path="configuracion/:id" element={<EditarConfiguracion />} />
             <Route path="transacciones" element={<ListaTransacciones />} />
             <Route path="transacciones/viewTransaccion/:id" element={<EditarTransaccion />} />
+
+            {/* DEPARTAMENTOS */}
+            <Route path="departamentos" element={<ListaDepartamentos/>} />
+            <Route path="departamentos/agregar" element={<CrearDepartamento/>} />
+            <Route path="departamentos/editar/:id" element={<EditarDepartamento/>} />
+
+            {/* DISTRITO */}
+            <Route path="distritos" element={<ListaDistritos/>} />
+            <Route path="distritos/agregar" element={<CrearDistrito/>} />
+            <Route path="distritos/editar/:id" element={<EditarDistrito/>} />
+
           </Route>
           <Route path="*" element={<>Error 404</>} />
         </Routes>

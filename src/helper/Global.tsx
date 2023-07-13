@@ -1,4 +1,4 @@
 export const Global = {
-  url: 'https://api.greennutrition.com.pe/api',
-  urlImages: 'https://api.greennutrition.com.pe'
+  url: 'https://api.padreeterno.com/public/api',
+  urlImages: 'https://api.padreeterno.com/public'
 }

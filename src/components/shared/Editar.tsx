@@ -17,6 +17,7 @@ const Editor = ({ content, setContent }: editorValues): JSX.Element => {
             config={config}
             // tabIndex={1}
             onBlur={newContent => { setContent(newContent) }}
+           // @ts-expect-error: Explanation for disabling TypeScript for this line
             onChange={(newContent) => {}}
         />
   )

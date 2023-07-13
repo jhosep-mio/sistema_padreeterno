@@ -23,6 +23,7 @@ const SideBar = (): JSX.Element => {
   const navigate = useNavigate()
   const [showSubmenu, setShowSubmenu] = useState(false)
   const [showSubmenu2, setShowSubmenu2] = useState(false)
+  const [showSubmenu3, setShowSubmenu3] = useState(false)
   const [activeItem, setActiveItem] = useState(0)
 
   const cerrarSession = async (): Promise<void> => {
@@ -176,6 +177,60 @@ const SideBar = (): JSX.Element => {
               >
                 <RiStackFill className="text-main" /> Transacciones
               </Link>
+            </li>
+            <li>
+              <button
+                onClick={() => {
+                  setShowSubmenu3(!showSubmenu3)
+                }}
+                className="w-full flex items-center justify-between py-2 px-4 rounded-lg hover:bg-secondary-900 transition-colors"
+              >
+                <span className="flex items-center gap-4">
+                  <RiHomeWifiFill className="text-main" /> Delivery
+                </span>
+                <RiArrowRightSLine
+                  className={`mt-1 ${
+                    showSubmenu3 ? 'rotate-90' : ''
+                  } transition-all`}
+                />
+              </button>
+              <ul
+                className={` ${
+                  showSubmenu3 ? 'h-[100px]' : 'h-0'
+                } overflow-y-hidden transition-all`}
+              >
+                <li>
+                  <Link
+                    to="departamentos"
+                    className={`py-2 px-4 border-l border-gray-500 ml-6 block relative before:w-3 before:h-3 before:absolute ${
+                      activeItem == 99
+                        ? 'before:bg-main'
+                        : 'before:bg-gray-500'
+                    } before:rounded-full before:-left-[6.5px] before:top-1/2 before:-translate-y-1/2 before:border-4 before:border-secondary-100 hover:text-white transition-colors`}
+                    onClick={() => {
+                      handleItemClick(99)
+                    }}
+                  >
+                    Departamentos
+                  </Link>
+                </li>
+
+                <li>
+                  <Link
+                    to="distritos"
+                    className={`py-2 px-4 border-l border-gray-500 ml-6 block relative before:w-3 before:h-3 before:absolute ${
+                      activeItem == 97
+                        ? 'before:bg-main'
+                        : 'before:bg-gray-500'
+                    } before:rounded-full before:-left-[6.5px] before:top-1/2 before:-translate-y-1/2 before:border-4 before:border-secondary-100 hover:text-white transition-colors`}
+                    onClick={() => {
+                      handleItemClick(97)
+                    }}
+                  >
+                    Distritos
+                  </Link>
+                </li>
+              </ul>
             </li>
           </ul>
         </div>

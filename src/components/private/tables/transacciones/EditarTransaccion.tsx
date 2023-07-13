@@ -84,7 +84,8 @@ export const EditarTransaccion = (): JSX.Element => {
       delivery: request.data.delivery,
       total_pago: request.data.total_pago,
       array_productos: request.data.array_productos,
-      estado: request.data.estado
+      estado: request.data.estado,
+      envio: request.data.envio
     })
   }
 
@@ -111,7 +112,8 @@ export const EditarTransaccion = (): JSX.Element => {
       delivery: '',
       total_pago: '',
       array_productos: '',
-      estado: 0
+      estado: 0,
+      envio: 0
     },
     validationSchema: SchemaTransacciones,
     onSubmit: updateTransaccion
@@ -227,14 +229,16 @@ export const EditarTransaccion = (): JSX.Element => {
 
           <div className="w-full lg:relative mb-5 flex flex-row justify-between gap-2">
             <div className="w-full">
-              <TitleBriefs titulo="Comentario" />
-              <InputsBriefsView
+              <TitleBriefs titulo="Detalle" />
+              <textarea
+                className="border border-black  placeholder-gray-400 outline-none focus:outline-none
+                                                      focus:border-black w-full pt-4 pr-4 pb-4 pl-4 mt-2 mr-0 mb-0 ml-0 text-base block bg-secondary-900
+                                                      rounded-md transition-all"
                 name="comentario"
-                type="text"
-                value={values.comentario}
                 onChange={handleChange}
                 onBlur={handleBlur}
-              />
+                disabled
+              >{values.comentario}</textarea>
               <Errors errors={errors.comentario} touched={touched.comentario} />
             </div>
           </div>
@@ -337,7 +341,11 @@ export const EditarTransaccion = (): JSX.Element => {
               ))}
           </div>
           <div className="w-full lg:relative mb-5 flex flex-col lg:flex-row justify-between gap-10 lg:gap-2">
-            <div className="flex flex-col w-full lg:w-1/2">
+            <div className="flex flex-col w-full lg:w-1/2 gap-5">
+              <div className="flex w-96">
+                <strong className="w-1/2">Costo de envio :</strong>
+                <p className="w-1/2">S./ {values.envio} </p>
+              </div>
               <div className="flex w-96">
                 <strong className="w-1/2">Pago final :</strong>
                 <p className="w-1/2">S./ {values.total_pago} </p>

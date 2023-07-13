@@ -7,11 +7,10 @@ import { Global } from '../../../../helper/Global'
 import { RiFilter2Fill } from 'react-icons/ri'
 import { Loading } from '../../../shared/Loading'
 import { Paginacion } from '../../../shared/Paginacion'
-import { type productosValues } from '../../../shared/Interfaces'
 import { DeleteItems } from '../../../shared/DeleteItems'
 import { LoadingSmall } from '../../../shared/LoadingSmall'
 
-export const ListaProductos = (): JSX.Element => {
+export const ListaDistritos = (): JSX.Element => {
   const token = localStorage.getItem('token')
   const [productos, setProductos] = useState([])
   const { setTitle, loadingComponents, setLoadingComponents } = useAuth()
@@ -26,11 +25,19 @@ export const ListaProductos = (): JSX.Element => {
     setLoadingComponents(true)
     const data = new FormData()
     data.append('buscar', search)
-    const request = await axios.post(`${Global.url}/getProductos`, data, {
+    const request = await axios.post(`${Global.url}/getDistritosSistema`, data, {
       headers: {
         Authorization: `Bearer ${token !== null && token !== '' ? token : ''}`
       }
     })
+    setProductos(request.data)
+    setTotalRegistros(request.data.length)
+    setLoadingComponents(false)
+  }
+
+  const getAllProductosIndex = async (): Promise<void> => {
+    setLoadingComponents(true)
+    const request = await axios.get(`${Global.url}/allDistritos`)
     setProductos(request.data)
     setTotalRegistros(request.data.length)
     setLoadingComponents(false)
@@ -53,10 +60,10 @@ export const ListaProductos = (): JSX.Element => {
 
   const preguntar = (id: number): void => {
     DeleteItems({
-      ruta: 'deleteProducto',
+      ruta: 'deleteDistrito',
       id,
       token,
-      getData: getAllProductos,
+      getData: getAllProductosIndex,
       totalPosts,
       cantidadRegistros,
       paginaActual,
@@ -65,7 +72,8 @@ export const ListaProductos = (): JSX.Element => {
   }
 
   useEffect(() => {
-    setTitle('Listado de Productos')
+    setTitle('Listado de Distritos')
+    getAllProductosIndex()
   }, [])
 
   return (
@@ -120,11 +128,11 @@ export const ListaProductos = (): JSX.Element => {
           <div className="hidden md:grid grid-cols-1 md:grid-cols-5 gap-4 mb-10 p-4">
             <h5 className="md:text-center">ID</h5>
             <h5 className="md:text-center">Nombre</h5>
-            <h5 className="md:text-center">Imagen</h5>
-            <h5 className="md:text-center">Categoria</h5>
+            <h5 className="md:text-center">Precio</h5>
+            <h5 className="md:text-center">Departamento</h5>
             <h5 className="md:text-center">Acciones</h5>
           </div>
-          {filterDate().map((pro: productosValues) => (
+          {filterDate().map((pro: { id: number, nombre: string, departamento: string, precio: string }) => (
             <div
               className="grid grid-cols-1 md:grid-cols-5 gap-4 items-center mb-4 bg-secondary-900 p-4 rounded-xl"
               key={pro.id}
@@ -137,21 +145,16 @@ export const ListaProductos = (): JSX.Element => {
                 <h5 className="md:hidden text-white font-bold mb-2">Nombre</h5>
                 <span>{pro.nombre}</span>
               </div>
-
-              <div className="md:text-center md:flex md:justify-center">
-                <h5 className="md:hidden text-white font-bold mb-2">Imagen</h5>
-                <img
-                  src={`${Global.urlImages}/productos/${pro.imagen1}`}
-                  alt=""
-                  className="w-12 h-12 object-contain"
-                />
-              </div>
               <div className="md:text-center">
-                <h5 className="md:hidden text-white font-bold mb-2">
-                  Categoria
-                </h5>
-                <span>{pro.categoria}</span>
+                <h5 className="md:hidden text-white font-bold mb-2">Precio</h5>
+                <span>{pro.precio}</span>
               </div>
+
+              <div className="md:text-center">
+                <h5 className="md:hidden text-white font-bold mb-2">Deprtamento</h5>
+                <span>{pro.departamento}</span>
+              </div>
+
               <div className="md:text-center md:flex md:justify-center">
                 <h5 className="md:hidden text-white font-bold mb-2">
                   Acciones

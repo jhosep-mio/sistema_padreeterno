@@ -15,6 +15,13 @@ export const SchemaCategorias = Yup.object().shape({
   nombre: Yup.string().required('Este campo es requerido').min(1)
 })
 
+// DISTRITOS
+export const SchemaDistrito = Yup.object().shape({
+  nombre: Yup.string().required('Este campo es requerido').min(1),
+  precio: Yup.string().required('Este campo es requerido').min(1),
+  id_departamento: Yup.string().required('Este campo es requerido').min(1)
+})
+
 // PRODUCTOS
 export const ScheamaProductos = Yup.object().shape({
   nombre: Yup.string().required('El campo es requerido'),
